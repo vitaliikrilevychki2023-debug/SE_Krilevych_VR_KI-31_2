@@ -1,0 +1,152 @@
+﻿<Window
+    Background="#F0F0F0"
+    Height="800"
+    Title="Customer Feedback"
+    Width="1000"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d"
+    x:Class="lab2_14.Pages.ViewReviews"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Window.Resources>
+        <ResourceDictionary Source="../styles.xaml" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Ліва панель для додавання нового відгуку  -->
+        <Border
+            Background="#FFFFFF"
+            CornerRadius="10"
+            Grid.Column="0"
+            Margin="20"
+            Padding="20">
+            <StackPanel>
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Margin="0,0,0,20"
+                    Text="Add Your Review" />
+
+                <TextBlock
+                    FontSize="18"
+                    Margin="0,0,0,10"
+                    Text="Your Rating:" />
+                <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
+                    <Button
+                        Click="Star_Click"
+                        Content="☆"
+                        FontSize="32"
+                        Name="Star1" />
+                    <Button
+                        Click="Star_Click"
+                        Content="☆"
+                        FontSize="32"
+                        Name="Star2" />
+                    <Button
+                        Click="Star_Click"
+                        Content="☆"
+                        FontSize="32"
+                        Name="Star3" />
+                    <Button
+                        Click="Star_Click"
+                        Content="☆"
+                        FontSize="32"
+                        Name="Star4" />
+                    <Button
+                        Click="Star_Click"
+                        Content="☆"
+                        FontSize="32"
+                        Name="Star5" />
+                </StackPanel>
+
+                <TextBlock
+                    FontSize="18"
+                    Margin="0,0,0,10"
+                    Text="Your Name:" />
+                <TextBox
+                    AcceptsReturn="True"
+                    FontSize="16"
+                    Margin="0,0,0,20"
+                    Text="{Binding Names}"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    FontSize="18"
+                    Margin="0,0,0,10"
+                    Text="Your Review:" />
+                <TextBox
+                    AcceptsReturn="True"
+                    FontSize="16"
+                    Height="150"
+                    Margin="0,0,0,20"
+                    Text="{Binding Review.Text}"
+                    TextWrapping="Wrap" />
+
+                <Button
+                    Background="#4CAF50"
+                    Click="SendReviewAndRating_Click"
+                    Content="Submit Review"
+                    FontSize="18"
+                    Foreground="White"
+                    Height="50" />
+            </StackPanel>
+        </Border>
+
+        <!--  Права панель для відображення відгуків  -->
+        <Border
+            Background="#FFFFFF"
+            CornerRadius="10"
+            Grid.Column="1"
+            Margin="20">
+            <DockPanel>
+                <TextBlock
+                    DockPanel.Dock="Top"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    Margin="20,20,20,10"
+                    Text="Customer Reviews" />
+
+                <Button
+                    Background="#FF5252"
+                    Click="Close"
+                    Content="Exit"
+                    DockPanel.Dock="Bottom"
+                    Foreground="White"
+                    Height="40"
+                    Margin="20"
+                    Width="100" />
+
+                <ScrollViewer Margin="10" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Reviews}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    BorderBrush="#BDBDBD"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    Margin="10"
+                                    Padding="15">
+                                    <StackPanel>
+                                        <TextBlock
+                                            FontWeight="Bold"
+                                            Margin="0,0,0,5"
+                                            Text="{Binding Rating, StringFormat='Rating: {0}/5'}" />
+                                        <TextBlock Text="{Binding Text}" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>
